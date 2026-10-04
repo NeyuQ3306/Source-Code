@@ -1,0 +1,27 @@
+# IntelliJ / PyCharm
+.idea/
+*.iml
+out/
+
+# Python virtual environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Competitive Programming Helper
+.cph/
+
+# Java
+*.class
+
+# C/C++
+*.exe
+*.o
+
+# Windows
+Thumbs.db
+desktop.ini

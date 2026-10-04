@@ -1,0 +1,50 @@
+ Ý tưởng: Thuật toán Tarjan giúp giải quyết bài toán đếm SCC, đỉnh trụ, cạnh cầu cho đồ thị
+có hướng và vô hướng với độ phức tạp tốt hơn Kosaraju O(2*(V+E)) thì Tarjan chỉ mất 1 lần gọi dfs
+=> Đpt O(V+E)
+- Kosaraju chỉ áp dụng cho G có hướng k giải quyết được bài toán đỉnh trụ, cạnh cầu
+- Tarjan quan trọng ở bước sử dụng 2 mảng id và lowlink
++ id[u] chỉ ra thứ tự duyệt đỉnh u theo thuật toán dfs bắt đầu từ chỉ số 1
++ lowlink[u]: chỉ ra id của 1 đỉnh v nhỏ nhất mà u có thể đi tới theo chiều duyệt cây hoặc
+có cạnh ngược (u,v) - v là cha ko trực tiếp của u (v là ancestor của u)
+
+=> low[u] = thời điểm nhỏ nhất mà u (hoặc subtree của u) có thể “quay ngược” lên được (ko phải quay về u mà đi lên tổ tiên của u)
++ quay ngược tại chính thời điểm nó được thăm low = id
++ quay ngược nếu có đường đi chỉ cần đi ngược lên low = low (v)
++ quay ngược nếu là "đường vòng" - có đường đi từ u->v giờ lại có đường đi từ v->u - cạnh ngược low = id (v)
+
+=> low[u] = min({id[u], low[v], id[v]})
+
+- Xây dựng mảng id, low trong hàm dfs:
++ Ban đầu khi duyệt dfs ta đánh dấu id[u] = low[u] = ++cnt (biến thứ tự duyệt), khởi tạo cnt = 1
++ Đánh dấu đã duyệt đỉnh u, duyệt các đỉnh kề v của u:
+Nếu v chưa được thăm - !vis[v]: 
+    Gọi dfs(v);
+    Cập nhật low[u] = min(low[u], low[v]); đây chính là trường hợp: u đi tới được v theo chiều duyệt dfs
+    // low[v] chứ ko phải id[v] mặc dù low[u] là min dis của 1 đỉnh v kề u vì nếu v chưa được thăm thì low và id của v bằng nhau
+Nếu v đã được thăm - tồn tại cạnh ngược (u,v):
+    Cập nhật low[u] = min(low[u], id[v]);
+
+
+- Bài toán thành phần liên thông mạnh: Những đỉnh u thoả mãn id = low thì sẽ là đỉnh bắt đầu của 1 thành phần
+liên thông mạnh:
++ Tại 1 đỉnh u nếu id = low nghĩa là nó ko có đường đi quay ngược lên các đỉnh tổ tiên, khi duyệt dfs cho các đỉnh v kề của u ta gọi là subtree gốc u
++ Khi cập nhật xong low, id cho tất cả subtree của u thì là duyệt xong 1 tpltm gốc u: dùng stack để lưu các node của subtree và khi duyệt xong subtree thì 
+pop ngược lại cho tới khi gặp đỉnh u
++ u được coi là node root của tpltm đang xét vì nó ko thể đi tới các đỉnh tổ tiên và các node con của nó cũng chỉ quay lại tối đa là id u
+
+
+- Bài toán cạnh cầu: Xét cạnh (u,v) với v là node con của u theo dfs
++ Cạnh (u,v) là cạnh cầu nếu low(v) > id(u) <=> từ v và các subtree của v ko có cách nào quay ngược lại u và tổ tiên của u
+=> Khi xóa cạnh (u,v) thì v và các subtree của v tạo thành 1 tpltm mới
++ Hay nghĩ ngược lại là nếu có đường đi ko cần qua cạnh (u,v) mà v vẫn tới được u hoặc tổ tiên của u <=> low(v) <= id(u) thì cạnh (u,v) ko phải là cạnh cầu
+
+- Bài toán đỉnh trụ: Có 2 trường hợp u là đỉnh trụ
++ Th1, u là gốc của cây dfs, u là đỉnh trụ nếu có ít nhất 2 node con
++ Th2, u ko phải là gốc của cây dfs, nếu có cạnh (u,v) với v là node con của u theo dfs và low(v) >= id(u) thì u là đỉnh trụ
+- low(v) >= id(u) nghĩa là từ đỉnh v và các node thuộc subtree của v ko thể quay lại các đỉnh tổ tiên của u được nên khi xóa đỉnh u thì v và subtree của v tạo thành
+1 tpltm mới
+
++ Tại sao khác với cạnh cầu, đỉnh trụ lại có thể trường hợp low(v) == id(u) nghĩa là v và các subtree của v có thể quay ngược lên lên đỉnh u nhưng khi xóa đỉnh u và các
+cạnh liên thuộc của u sẽ ko còn đường đi lên tổ tiên của u nữa => tạo thành 1 tpltm mới 
++ Cng nghĩ ngược lại như cạnh cầu nếu có đường đi từ v tới tổ tiên của u <=> low(v) < id(u) thì khi xóa đỉnh u và các cạnh liên thuộc thì số tplt ko tăng lên hay u ko phải 
+đỉnh trụ
