@@ -25,3 +25,9 @@ __pycache__/
 # Windows
 Thumbs.db
 desktop.ini
+
+# Folder cá nhân / code test
+DSA/LeetCode_RoadMap/LinhTinh/
+DSA/LeetCode_RoadMap/ThucHanh/
+Python/Thực hành/
+OOP/Java/src/codeptit/thuchanh
