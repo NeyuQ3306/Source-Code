@@ -1,10 +1,27 @@
+import math
 from collections import Counter
 
-n = int(input())
-se = set(Counter(a))
-a = list(se)
+def nt(n):
+    for i in range(2,int(math.isqrt(n))+1):
+        if n%i == 0: return False
+    return n>1
 
-presum = []
+n = int(input())
+# defaultvalue ko khai báo thì mặc định = None
+a = list(dict.fromkeys(map(int,input().split())))
+
+presum = [0] * len(a)
 presum[0] = a[0]
-for i in range(1,len(b)):
-    presum[i] = presum[i-1] + b
+for i in range(1,len(a)):
+    presum[i] = presum[i-1] + a[i]
+
+ans = -1
+summ = sum(a)
+
+for i in range(len(a)):
+    if nt(presum[i]) and nt(summ - presum[i]):
+        ans = i
+        break
+
+print(ans if ans != -1 else "NOT FOUND")
+
