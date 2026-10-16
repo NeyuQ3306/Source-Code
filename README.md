@@ -19,20 +19,39 @@ The main purpose is to document my learning journey, improve problem-solving ski
 
 ## 📂 Repository Structure
 
-The repository is organized by programming language and learning topic.
+## 📂 Repository Structure
+
+The repository is organized into three main learning areas:
+
+- **DSA/** — Data Structures & Algorithms, including Codeforces exercises, CodePTIT solutions, Graph Theory, and programming notes.
+- **OOP/Java/** — Java Object-Oriented Programming, fundamental concepts, and CodePTIT exercises.
+- **Python/** — Python programming exercises, CodePTIT solutions, and personal programming practice.
+
+The repository structure will be expanded as new programming topics and projects are added.
 
 ```text
+
 Source_Code/
+├── DSA/
+│   ├── CodeForces/
+│   ├── Code_Ptit/
+│   ├── Ly_Thuyet_Do_Thi/
+│   └── Note_code/
+│
 ├── OOP/
 │   └── Java/
-│       └── src/
-│           ├── codeptit/
-│           └── learning/
-│               └── oop/
+│       ├── src/
+│       │   ├── codeptit/
+│       │   └── learning/
+│       └── .gitignore
+│
 ├── Python/
-├── C++/
-├── SQL/
+│   ├── CodePtit/
+│   └── Linhtinh_Hoc/
+│
+├── .gitignore
 └── README.md
+
 ```
 
 *Note: The structure above illustrates the intended organization. Actual directories may change as the repository develops.*
