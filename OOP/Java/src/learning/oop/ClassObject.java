@@ -27,7 +27,7 @@ Trong Java: Dùng từ khóa extends.
 
 3. Tính Đa hình (Polymorphism)
 Ý nghĩa đơn giản: Cùng một hành động (phương thức) nhưng các đối tượng thuộc các Lớp khác nhau sẽ thực hiện theo các
- cách khác nhau.
+cách khác nhau.
 
 Ví dụ Ô tô: Khi nhấn nút KhoiDong(), xe xăng sẽ gầm máy và đánh lửa, xe điện sẽ im lặng bật hệ thống pin, xe máy chạy
 bằng xích... Cùng là hành động "Khởi động", nhưng cơ chế chạy thực tế tùy thuộc vào từng loại xe.
