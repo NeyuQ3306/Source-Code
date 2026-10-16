@@ -15,9 +15,6 @@ The main purpose is to document my learning journey, improve problem-solving ski
 | Java | Object-Oriented Programming, Data Structures & Algorithms |
 | Python | Programming Fundamentals, Algorithms, Problem Solving |
 | C++ | Data Structures & Algorithms, Competitive Programming |
-| SQL | Database Management, Relational Queries |
-
-## 📂 Repository Structure
 
 ## 📂 Repository Structure
 
